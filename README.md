@@ -19,7 +19,7 @@
 ### Requirements
 1.  Functioning iOS application that scales well for any size iOS device.
 2.  Ability to search NASA's Image and Video Library using their API.
-3.  Display search results (only worry about to 20 results) of images, videos or both for a user to browse.
+3.  Display search results (only worry about top 20 results) of images, videos or both for a user to browse.
 4.  Allow a user to touch an image or video to either view full size image or play video.
 * **Feel free to use any open source libraries to help with this task**
 * **Design decisions are all up to you**
