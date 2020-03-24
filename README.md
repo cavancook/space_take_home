@@ -26,12 +26,14 @@
 
 ### Resources
 *Some helpful docs*
-1.  [React Native Docs]([https://reactnative.dev/](https://reactnative.dev/))
-2.  [NASA's API Overview]([https://api.nasa.gov/](https://api.nasa.gov/)) <- get a free API key here
-3.  [NASA's Image and Video Library API docs]([https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf))
-4.  [NASA's webpage that uses this data]([https://images.nasa.gov/](https://images.nasa.gov/))
+1.  [React Native Docs](https://reactnative.dev/)
+2.  [NASA's API Overview](https://api.nasa.gov/) <- get a free API key here
+3.  [NASA's Image and Video Library API docs](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf)
+4.  [NASA's webpage that uses this data](https://images.nasa.gov/)
 
 ### Delivery
 *Once you complete the items above,*
 1. Email Conor Souhrada @ conor.souhrada@microbeformulas.com with the publicly accessible URL to your repository.
 2. Include any instructions to get the project running locally.
+
+*reach out to Conor @ conor.souhrada@microbeformulas.com if you need clarification or have any questions.*
