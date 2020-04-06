@@ -1,7 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
+ * This is an attempted recreation of the nasa image website
+ * https://images.nasa.gov/ on react native using their own api
+ * 
+ * @author Cavan Cook
  * @format
  * @flow
  */
@@ -17,96 +18,66 @@ import {
   Button,
   FlatList,
   Image,
+  Dimensions,
 } from 'react-native';
 
-// import { Colors, ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
-
-
+const numColumns = 3;
 
 export default class App extends React.Component {
-
-  // const [name, setName] = useState([
-  //   {name: 'cavan', key: '1'}, 
-  //   {name: 'zoe', key: '2'}, 
-  //   {name: 'conor', key: '3'},
-  //   {name: 'kyle', key: '4'}, 
-  //   {name: 'kelly', key: '5'}, 
-  //   {name: 'james', key: '6'},
-  //   {name: 'jess', key: '7'}, 
-  //   {name: 'kevin', key: '8'}, 
-  //   {name: 'jimmy', key: '9'}
-  // ]);
-  //   const [image, setImage] = useState([
-  //     {image: 'uri: \'https://images-assets.nasa.gov/image/as11-42-6179/as11-42-6179~thumb.jpg\'', key: '1'}, 
-  //     {image: 'uri: \'https://images-assets.nasa.gov/image/as11-42-6179/as11-42-6179~thumb.jpg\'', key: '2'}, 
-  //     // {image: 'conor', key: '3'},
-  //     // {image: 'kyle', key: '4'}, 
-  //     // {image: 'kelly', key: '5'}, 
-  //     // {image: 'james', key: '6'},
-  //     // {image: 'jess', key: '7'}, 
-  //     // {image: 'kevin', key: '8'}, 
-  //     // {image: 'jimmy', key: '9'},
-  //   ]);
-
-    // const numColumns = 3;
-
-    constructor(props) {
-      super(props);
-      this.state = {
-        dataSource:[]
-       };
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource:[]
     };
+  };
 
-    renderItem = ({ item }) => {
-      return (
+  renderItem = ({ item }) => {
+    return (
       <View>
         <Image style={styles.nasaImage}
-        source={{uri: item.download_url}}/>
-        {/* <Text>{item.author}</Text> */}
+          source={{uri: item.download_url}}/>
+          {/* <Text>{item.author}</Text> */}
       </View>
-      )
-    }
+    )
+  }
 
-     componentDidMount(){
-      fetch("https://picsum.photos/v2/list")
+  componentDidMount(){
+    fetch("https://picsum.photos/v2/list")
       .then(response => response.json())
       .then((responseJson)=> {
         this.setState({
          dataSource: responseJson
         })
-      })
-      .catch(error=>console.log(error)) //to catch the errors if any
-    };
+    })
+    .catch(error=>console.log(error)) //to catch the errors if any
+  };
+
   render() {
-  return (
-    <>
-      {/* <StatusBar barStyle="dark-content" /> */}
-      <SafeAreaView>
-        <View style={styles.top}>
-          <TextInput 
-            placeholder="Search for ...(e.g. Orion)" 
-            placeholderTextColor={'white'}
-            style={styles.searchContainer}/>
-
-        </View>
-        <View style={styles.imageContainer}>
-
+    return (
+      <>
+        {/* <StatusBar barStyle="dark-content" /> */}
+        <SafeAreaView>
+          <View style={styles.top}>
+           <TextInput 
+              placeholder="Search for ...(e.g. Orion)" 
+              placeholderTextColor={'white'}
+              style={styles.searchContainer}/>
+          </View>
+          <View style={styles.imageContainer}>
             <FlatList 
-            data={this.state.dataSource}
-            style={styles.imageContainer}
-            numColumns={3}
-            renderItem= {this.renderItem}
+              data={this.state.dataSource}
+              // style={styles.imageContainer}
+              numColumns={3}
+              renderItem= {this.renderItem}
             />
-        </View>
-        
-      </SafeAreaView>
-  </>
-  );
-            }    
+            </View>
+          </SafeAreaView>
+        </>
+      );
+    }    
 };
 
 const styles = StyleSheet.create({
-  
   top: {
     alignItems: 'center',
     backgroundColor: '#26282f',
@@ -115,20 +86,23 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   imageContainer: {
+    alignContent: 'center',
     backgroundColor: '#26282f',
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // flexWrap: 'wrap',
     width: '100%',
-    height:'85%',
+    height:'85%'
   },
   nasaImage: {
-    width: '33.333%',
-    height: '33.333%',
-    margin: 15,
-    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 100,
+    height: 100,
+    margin: 5,
+    // padding: 10,
     borderColor: 'black',
     borderWidth: 2,
-    backgroundColor: 'orange',
+    backgroundColor: 'black'
   },
   searchContainer: {
     alignContent: 'center',
@@ -140,17 +114,6 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     marginBottom: '5%',
     color: 'white',
-    fontSize: 15,
-  },
-  styleTester: {
-    flexDirection: 'row',
-    width: '33.333%',
-    height: '10%',
-    // flexwrap: 'wrap',
-    borderWidth: 3,
-    borderColor: 'black',
-    backgroundColor: 'gray',
+    fontSize: 15
   }
 });
-
-// export default App;
