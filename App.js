@@ -48,10 +48,10 @@ export default class App extends React.Component {
   //     // {image: 'jimmy', key: '9'},
   //   ]);
 
-  //   const numColumns = 3;
+    // const numColumns = 3;
 
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.state = {
         dataSource:[]
        };
@@ -61,8 +61,8 @@ export default class App extends React.Component {
       return (
       <View>
         <Image style={styles.nasaImage}
-        source={{uri: item.url}}/>
-        <Text>{item.author}</Text>
+        source={{uri: item.download_url}}/>
+        {/* <Text>{item.author}</Text> */}
       </View>
       )
     }
@@ -93,8 +93,8 @@ export default class App extends React.Component {
 
             <FlatList 
             data={this.state.dataSource}
-            // style={styles.nasaImage}
-            // numColumns={numColumns}
+            style={styles.imageContainer}
+            numColumns={3}
             renderItem= {this.renderItem}
             />
         </View>
@@ -123,11 +123,12 @@ const styles = StyleSheet.create({
   },
   nasaImage: {
     width: '33.333%',
-    height: '40%',
-    padding: 40,
+    height: '33.333%',
+    margin: 15,
+    padding: 20,
     borderColor: 'black',
     borderWidth: 2,
-    // backgroundColor: 'orange',
+    backgroundColor: 'orange',
   },
   searchContainer: {
     alignContent: 'center',
