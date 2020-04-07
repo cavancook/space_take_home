@@ -19,6 +19,7 @@ import {
   FlatList,
   Image,
   Dimensions,
+  index,
 } from 'react-native';
 
 const numColumns = 3;
@@ -35,18 +36,20 @@ export default class App extends React.Component {
     return (
       <View>
         <Image style={styles.nasaImage}
-          source={{uri: item.download_url}}/>
-          {/* <Text>{item.author}</Text> */}
+          source={{uri: item.href}}/>
+          {/* <Text>{item.href}</Text> */}
       </View>
     )
   }
 
+  _keyExtractor = (item, index) => index;
+
   componentDidMount(){
-    fetch("https://picsum.photos/v2/list")
+    fetch("https://images-api.nasa.gov/search?q=stars&media_type=image")
       .then(response => response.json())
       .then((responseJson)=> {
         this.setState({
-         dataSource: responseJson
+         dataSource: responseJson.collection.items
         })
     })
     .catch(error=>console.log(error)) //to catch the errors if any
@@ -68,6 +71,7 @@ export default class App extends React.Component {
               data={this.state.dataSource}
               // style={styles.imageContainer}
               numColumns={3}
+              keyExtractor={this._keyExtractor}
               renderItem= {this.renderItem}
             />
             </View>
