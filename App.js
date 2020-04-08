@@ -14,41 +14,39 @@ import {
   View,
   Text,
   TextInput,
-  // StatusBar,
-  Button,
   FlatList,
   Image,
   Dimensions,
   index,
-  TouchableWithoutFeedback,
+  TouchableHighlight,
   ScrollView
 } from 'react-native';
+
+const numColumns = 3;
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource:[]
+      dataSource:[],
+      pressStatus: false
     };
   };
 
   renderItem = ({ item }) => {
-    return (
+   return (
       <View>
-        <TouchableWithoutFeedback
-        onPress={this._onPressButton} >
-        <Image style={styles.nasaImage}
-          source={{uri: item.links[0].href}}/>
-          </TouchableWithoutFeedback>
+        <TouchableHighlight>
+          <Image style={this.state.pressStatus
+                ? styles.nasaImagePress
+                : styles.nasaImage}
+            source={{uri: item.links[0].href}}/>
+        </TouchableHighlight>
       </View>
     )
   }
 
   _keyExtractor = (item, index) => index;
-
-  _onPressButton() {
-    alert('RESIZE')
-  }
 
   componentDidMount(){
     fetch("https://images-api.nasa.gov/search?q=stars&media_type=image")
@@ -118,8 +116,19 @@ const styles = StyleSheet.create({
   nasaImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: Dimensions.get('window').width/3,
-    height: Dimensions.get('window').width/3,
+    width: Dimensions.get('window').width/numColumns,
+    height: Dimensions.get('window').width/numColumns,
+    margin: 1,
+    flex: 1,
+    borderColor: 'black',
+    borderWidth: 1,
+    backgroundColor: 'black'
+  },
+  nasaImagePress: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').width,
     margin: 1,
     flex: 1,
     borderColor: 'black',
