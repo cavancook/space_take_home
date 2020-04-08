@@ -36,7 +36,7 @@ export default class App extends React.Component {
     return (
       <View>
         <Image style={styles.nasaImage}
-          source={{uri: item.href}}/>
+          source={{uri: item.links[0].href}}/>
           {/* <Text>{item.href}</Text> */}
       </View>
     )
@@ -66,15 +66,15 @@ export default class App extends React.Component {
               placeholderTextColor={'white'}
               style={styles.searchContainer}/>
           </View>
-          <View style={styles.imageContainer}>
+          {/* <View style={styles.imageContainer}> */}
             <FlatList 
               data={this.state.dataSource}
-              // style={styles.imageContainer}
+              style={styles.imageContainer}
               numColumns={3}
               keyExtractor={this._keyExtractor}
               renderItem= {this.renderItem}
             />
-            </View>
+            {/* </View> */}
           </SafeAreaView>
         </>
       );
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
   nasaImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 100,
-    height: 100,
-    margin: 5,
-    // padding: 10,
+    width: Dimensions.get('window').width/3,
+    height: Dimensions.get('window').width/3,
+    margin: 1,
+    flex: 1,
     borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 1,
     backgroundColor: 'black'
   },
   searchContainer: {
