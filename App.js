@@ -20,9 +20,9 @@ import {
   Image,
   Dimensions,
   index,
+  TouchableWithoutFeedback,
+  ScrollView
 } from 'react-native';
-
-const numColumns = 3;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,13 +35,20 @@ export default class App extends React.Component {
   renderItem = ({ item }) => {
     return (
       <View>
+        <TouchableWithoutFeedback
+        onPress={this._onPressButton} >
         <Image style={styles.nasaImage}
           source={{uri: item.links[0].href}}/>
+          </TouchableWithoutFeedback>
       </View>
     )
   }
 
   _keyExtractor = (item, index) => index;
+
+  _onPressButton() {
+    alert('RESIZE')
+  }
 
   componentDidMount(){
     fetch("https://images-api.nasa.gov/search?q=stars&media_type=image")
@@ -79,6 +86,7 @@ export default class App extends React.Component {
               style={styles.searchContainer} 
               onChangeText={(text) => {this.fetchData(text)}}/>
           </View>
+          <ScrollView>
             <FlatList 
               data={this.state.dataSource}
               style={styles.imageContainer}
@@ -86,6 +94,7 @@ export default class App extends React.Component {
               keyExtractor={this._keyExtractor}
               renderItem= {this.renderItem}
             />
+            </ScrollView>
           </SafeAreaView>
         </>
       );
@@ -97,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#26282f',
     width: '100%',
-    height: '15%',
+    height: '10%',
     fontSize: 18
   },
   imageContainer: {
