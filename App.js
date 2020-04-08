@@ -37,7 +37,6 @@ export default class App extends React.Component {
       <View>
         <Image style={styles.nasaImage}
           source={{uri: item.links[0].href}}/>
-          {/* <Text>{item.href}</Text> */}
       </View>
     )
   }
@@ -55,18 +54,31 @@ export default class App extends React.Component {
     .catch(error=>console.log(error)) //to catch the errors if any
   };
 
+  fetchData(text) {
+    this.setState({ text });
+    const url = 'https://images-api.nasa.gov/search?q=';
+    const imageType = '&media_type=image';
+    fetch(url + text + imageType)
+      .then(response => response.json())
+      .then((responseJson) => {
+        this.setState({
+          dataSource: responseJson.collection.items
+        })
+      })
+      .catch(error=>console.log(error)) //to catch the errors if any
+  };
+
   render() {
     return (
       <>
-        {/* <StatusBar barStyle="dark-content" /> */}
         <SafeAreaView>
           <View style={styles.top}>
            <TextInput 
               placeholder="Search for ...(e.g. Orion)" 
               placeholderTextColor={'white'}
-              style={styles.searchContainer}/>
+              style={styles.searchContainer} 
+              onChangeText={(text) => {this.fetchData(text)}}/>
           </View>
-          {/* <View style={styles.imageContainer}> */}
             <FlatList 
               data={this.state.dataSource}
               style={styles.imageContainer}
@@ -74,7 +86,6 @@ export default class App extends React.Component {
               keyExtractor={this._keyExtractor}
               renderItem= {this.renderItem}
             />
-            {/* </View> */}
           </SafeAreaView>
         </>
       );
@@ -92,8 +103,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignContent: 'center',
     backgroundColor: '#26282f',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
     width: '100%',
     height:'85%'
   },
